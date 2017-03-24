@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Infinitive:</strong>
+  <%= @verb.infinitive %>
+</p>
+
+<p>
+  <strong>Tense:</strong>
+  <%= @verb.tense.name %>
+</p>
+
+<p>
+  <strong>ich:</strong>
+  <%= @verb.ich %>
+</p>
+
+<p>
+  <strong>du:</strong>
+  <%= @verb.du %>
+</p>
+
+<p>
+  <strong>er, sie, es:</strong>
+  <%= @verb.er %>
+</p>
+
+<p>
+  <strong>wir:</strong>
+  <%= @verb.wir %>
+</p>
+
+<p>
+  <strong>ihr:</strong>
+  <%= @verb.ihr %>
+</p>
+
+<p>
+  <strong>sie, Sie:</strong>
+  <%= @verb.sie %>
+</p>
+
+<%= link_to 'Edit', edit_verb_path(@verb) %> |
+<%= link_to 'Back', verbs_path %>

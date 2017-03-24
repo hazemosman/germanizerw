@@ -1,0 +1,58 @@
+<%= form_for(verb) do |f| %>
+  <% if verb.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(verb.errors.count, "error") %> prohibited this verb from being saved:</h2>
+
+      <ul>
+      <% verb.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :infinitive %>
+    <%= f.text_field :infinitive %>
+  </div>
+
+  <div class="field">
+    <%= f.label :tense_id %>
+    <%= f.collection_select :tense_id , @tenses, :id, :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :ich, :ich %>
+    <%= f.text_field :ich %>
+  </div>
+
+  <div class="field">
+    <%= f.label :du, :du %>
+    <%= f.text_field :du %>
+  </div>
+
+  <div class="field">
+    <%= f.label :er, 'er, sie, es' %>
+    <%= f.text_field :er %>
+  </div>
+
+  <div class="field">
+    <%= f.label :wir, :wir %>
+    <%= f.text_field :wir %>
+  </div>
+
+  <div class="field">
+    <%= f.label :ihr, :ihr %>
+    <%= f.text_field :ihr %>
+  </div>
+
+  <div class="field">
+    <%= f.label :sie, 'sie, Sie' %>
+    <%= f.text_field :sie %>
+  </div>
+
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

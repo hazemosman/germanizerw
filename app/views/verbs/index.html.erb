@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Verbs</h1>
+
+<% if ! @verbs.blank? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Infinitive</th>
+        <th>Tense</th>
+        <th>ich</th>
+        <th>du</th>
+        <th>er, sie, es</th>
+        <th>wir</th>
+        <th>ihr</th>
+        <th>sie, Sie</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @verbs.each do |verb| %>
+        <tr>
+          <td><%= verb.infinitive %></td>
+          <td><%= verb.tense.name %></td>
+          <td><%= verb.ich %></td>
+          <td><%= verb.du %></td>
+          <td><%= verb.er %></td>
+          <td><%= verb.wir %></td>
+          <td><%= verb.ihr %></td>
+          <td><%= verb.sie %></td>
+          <td><%= link_to 'Show', verb %></td>
+          <td><%= link_to 'Edit', edit_verb_path(verb) %></td>
+          <td><%= link_to 'Destroy', verb, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+    <% else %>
+<p><strong>No Verbs added yet</strong></p>
+<% end %>
+
+<br>
+
+<%= link_to 'Home', root_path %></li>
+<%= link_to 'New Verb', new_verb_path %>
+</ul>
