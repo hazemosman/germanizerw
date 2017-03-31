@@ -14,6 +14,7 @@
   <div class="field">
     <%= f.label :infinitive %>
     <%= f.text_field :infinitive %>
+    <%= f.submit "Guess" if @verb.new_record? %>
   </div>
 
   <div class="field">

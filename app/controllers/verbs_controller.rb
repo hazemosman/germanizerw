@@ -1,5 +1,8 @@
+#require "#{Rails.root}/lib/germanizer/verby"
+
 class VerbsController < ApplicationController
   before_action :set_verb, only: [:show, :edit, :update, :destroy]
+
 
   # GET /verbs
   # GET /verbs.json
@@ -28,13 +31,30 @@ class VerbsController < ApplicationController
   def create
     @verb = Verb.new(verb_params)
 
-    respond_to do |format|
-      if @verb.save
-        format.html { redirect_to @verb, notice: 'Verb was successfully created.' }
-        format.json { render :show, status: :created, location: @verb }
-      else
-        format.html { render :new }
-        format.json { render json: @verb.errors, status: :unprocessable_entity }
+    if params[:commit] == 'Guess'
+      unless (verb_params[:infinitive]).empty?
+        conj = Verby.present_conj(verb_params[:infinitive])
+        unless conj.nil? || conj.empty?
+          @verb.ich = conj['ich']
+          @verb.du = conj['du']
+          @verb.er = conj['er']
+          @verb.wir = conj['wir']
+          @verb.ihr = conj['ihr']
+          @verb.sie = conj['Sie']
+        end
+      end
+      @tenses = Tense.all
+      render :new
+    else
+      respond_to do |format|
+        if @verb.save
+          format.html { redirect_to :verbs, notice: 'Verb was successfully created.' }
+          format.json { render :index, status: :created, location: @verb }
+        else
+          @tenses = Tense.all
+          format.html { render :new }
+          format.json { render json: @verb.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -71,6 +91,6 @@ class VerbsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def verb_params
-      params.require(:verb).permit(:infinitive, :tense_id, :ich, :du, :er, :sie_she, :es, :wir, :ihr, :sie, :sie_formal)
+      params.require(:verb).permit(:infinitive, :tense_id, :ich, :du, :er, :wir, :ihr, :sie)
     end
 end
